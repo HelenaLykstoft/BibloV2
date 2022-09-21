@@ -15,7 +15,7 @@ public class ConnectionConfiguration
             pass = UserInput.getString("Write password: ");
         }
         Connection connection = null;
-        String url = "jdbc:mysql://localhost:3306/biblo?serverTimezone=CET&useSSL=false";
+        String url = "jdbc:mysql://localhost:3306/biblo2?serverTimezone=CET&useSSL=false";
         String user = "root";
         String password = pass;
         try {
