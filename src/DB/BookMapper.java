@@ -3,6 +3,8 @@ package DB;
 import Entities.Book;
 
 import java.sql.*;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class BookMapper {
@@ -32,15 +34,34 @@ public class BookMapper {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-
-
             return book;
 
         }
-
-
     }
 
+    public static List<Book> getBooks() throws SQLException {
+        List<Book> bookList = new LinkedList<>();
 
+        String sql = "SELECT * FROM BogTabelx";
+
+        try (Connection con = ConnectionConfiguration.getConnection();  // får en connection
+
+             // se evt. https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                int bookID = resultSet.getInt("idBogTabelx");
+                String author = resultSet.getString("Forfatter");
+                String title = resultSet.getString("Titel");
+
+                bookList.add(new Book(bookID, title, author));
+
+            }
+
+            return bookList;
+        }
+
+    }
 }
 
