@@ -39,7 +39,7 @@ public class BookMapper {
         }
     }
 
-    public static List<Book> getBooks() throws SQLException {
+    protected static List<Book> getBooks() throws SQLException {
         List<Book> bookList = new LinkedList<>();
 
         String sql = "SELECT * FROM BogTabelx";
@@ -63,5 +63,29 @@ public class BookMapper {
         }
 
     }
+
+    protected static String deleteBook(int bookID) {
+
+        String sql = "delete from BogTabelx where idBogTabelx = ?";
+
+        try (Connection con = ConnectionConfiguration.getConnection(); PreparedStatement ps = con.prepareStatement(sql);
+
+        ) {
+            ps.setInt(1, bookID);
+            int res = ps.executeUpdate();
+            if (res > 0) {
+
+                return "The book with the ID " + "\"" + bookID + "\"" + " has now been deleted.";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "A book with the ID " + "\"" + bookID + "\"" + " was not found in the list.";
+
+    }
+
 }
+
 

@@ -13,4 +13,8 @@ public class Facade {
     public static List<Book> getBooks() throws SQLException {
         return BookMapper.getBooks();
     }
+
+    public static String deleteBook(int bookID) {
+        return BookMapper.deleteBook(bookID);
+    }
 }

@@ -26,6 +26,9 @@ public class Main {
                 case "see books":
                     bookList = Facade.getBooks();
                     soutLists(bookList);
+                    break;
+                case "delete books":
+                    System.out.println(Facade.deleteBook(UserInput.getInt("Write bookID")));
 
             }
         }
